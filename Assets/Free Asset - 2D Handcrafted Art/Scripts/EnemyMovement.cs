@@ -7,6 +7,7 @@ public class EnemyMovement : MonoBehaviour
 
     public CharacterController2D controller;
     public Animator animator;
+ 
 
 
     public float runSpeed = 40f;
@@ -27,4 +28,7 @@ public class EnemyMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, false);
       
     }
+
+
+   
 }

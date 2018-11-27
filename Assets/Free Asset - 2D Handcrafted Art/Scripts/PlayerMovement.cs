@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
+    private int numEnemy = 0;
+
     // Update is called once per frame
     void Update()
     {
@@ -55,5 +57,25 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
         jump = false;
         animator.SetBool("IsJumping", false);
+    }
+
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+
+            if (numEnemy < 5)
+            {
+                Instantiate(col.gameObject, new Vector2(5, 0), Quaternion.identity);
+                Instantiate(col.gameObject, new Vector2(10, 0), Quaternion.identity);
+                numEnemy++;
+            }
+            else
+            {
+                numEnemy--;
+            }
+            Destroy(col.gameObject);
+        }
     }
 }
