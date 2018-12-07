@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
-    private int numEnemy = 0;
+
 
     // Update is called once per frame
     void Update()
@@ -24,7 +25,14 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            jump = true;
+            animator.SetBool("IsJumping", true);
+        }
+            if (Input.GetButtonDown("Jump"))
         {
             jump = true;
             animator.SetBool("IsJumping", true);
@@ -58,24 +66,25 @@ public class PlayerMovement : MonoBehaviour
         jump = false;
         animator.SetBool("IsJumping", false);
     }
+    public void DestroyAllGameObjects()
+    {
+        GameObject[] GameObjects = (FindObjectsOfType<GameObject>() as GameObject[]);
 
+        for (int i = 0; i < GameObjects.Length; i++)
+        {
+            Destroy(GameObjects[i]);
+        }
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
         if (col.gameObject.tag == "Enemy")
         {
+            DestroyAllGameObjects();
+            SceneManager.LoadScene("Menu");
 
-            if (numEnemy < 5)
-            {
-                Instantiate(col.gameObject, new Vector2(5, 0), Quaternion.identity);
-                Instantiate(col.gameObject, new Vector2(10, 0), Quaternion.identity);
-                numEnemy++;
-            }
-            else
-            {
-                numEnemy--;
-            }
-            Destroy(col.gameObject);
+           
         }
     }
+    
 }

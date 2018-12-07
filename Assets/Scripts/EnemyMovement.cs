@@ -5,6 +5,9 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
 
+
+    private int numEnemy = 0;
+
     public CharacterController2D controller;
     public Animator animator;
  
@@ -30,5 +33,13 @@ public class EnemyMovement : MonoBehaviour
     }
 
 
-   
+    void OnBecameInvisible()
+    {
+        gameObject.transform.position = new Vector2(3, 0);
+       
+    }
+
+
+
+
 }
