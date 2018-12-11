@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: f715906a9e640b24fade1e1b81db5865
+  - enabled: 1
     path: Assets/Scenes/MainLevel.unity
     guid: 10e1f3f5a30161a4e93eab487e48f2cf
-  - enabled: 0
-    path: Assets/sunnyland woods/Scenes/demo.unity
-    guid: c133ca384abbd4cecb880aa44fd0d2aa
   m_configObjects: {}
