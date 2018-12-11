@@ -15,8 +15,11 @@ public class PlayerMovement : MonoBehaviour
     bool jump = false;
     bool crouch = false;
 
+   
 
 
+
+   // int playerPV = MenuScript.playerPVCounter;
     // Update is called once per frame
     void Update()
     {
@@ -52,6 +55,7 @@ public class PlayerMovement : MonoBehaviour
     public void OnLanding()
     {
         animator.SetBool("IsJumping", false);
+  //      EnemyMovement.jumpVar = true;
     }
 
     public void OnCrouching(bool isCrouching)
@@ -80,10 +84,25 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "Enemy")
         {
-            DestroyAllGameObjects();
-            SceneManager.LoadScene("Menu");
-
+            PointVitale.pvCounter-- ;
+            col.gameObject.transform.position = new Vector2(3, 0);
            
+
+
+            if (PointVitale.pvCounter == 0)
+            {
+                PointVitale.pvCounter = 3;
+                DestroyAllGameObjects();
+                EnemyMovement.numEnemy = 0;
+
+                SceneManager.LoadScene("Menu");
+
+            }
+
+            //  Score.pvCounter = playerPV;
+
+
+
         }
     }
     
